@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import './App.css'
-import fernandoImage from './assets/FernsnoAlonso.jpg';
 
 const Card = styled.section`
   width: 300px;
@@ -44,37 +42,45 @@ const InfoItem = styled.div`
   }
 `;
 
-type Person={
+type Unit={
   imageId: string;
   name: string;
   price:number;
-  wins:string;
-  team: string;
-};
-
-type ProductProps = {
-  person: Person;
+  area:string;
+  bedrooms: string;
+  location:string;
   imageSize?: number;
+
 };
 
-function Product({ person}: ProductProps){
+type ProductProps={
+  unit: Unit;
+};
+
+
+
+function Product({unit}:ProductProps){
 return(
   // with emotion 
 <Card>
-  <TopImage src={person.imageId} alt={person.name}/>
-  <Name>{person.name}</Name>
+  <TopImage src={unit.imageId} alt={unit.name}/>
+  <Name>{unit.name}</Name>
   <InfoRow>
     <InfoItem>
       <b>Price:</b>
-      ${person.price}M
+      {unit.price}M
     </InfoItem>
     <InfoItem>
-      <b>Wins: </b>
-      {person.wins}
+      <b>Area: </b>
+      {unit.area} sqm
     </InfoItem>
     <InfoItem>
-      <b>Team:</b>
-      {person.team}
+      <b>Bedrooms:</b>
+      {unit.bedrooms}
+    </InfoItem>
+    <InfoItem>
+      <b>Location: </b>
+      {unit.location}
     </InfoItem>
   </InfoRow>
 </Card>
@@ -105,15 +111,15 @@ return(
 
 
 export default function ProductCard(){
-  return(
-<div>
- <Product person={{
-  imageId: fernandoImage, 
-  name: "Fernando Alonso",
-  wins: "32",
-  price:8.8,
-  team: "Aston Martin"
-}} />
-</div>
-  );
+ return(
+  <Product
+  unit={{
+    name: "Villa C20",
+    price: 3.5,
+    area: "407 ",
+    bedrooms: "5",
+    location: "Sedra",
+    imageId: "src/assets/C20.jpg",
+  }}/>
+ );
 }

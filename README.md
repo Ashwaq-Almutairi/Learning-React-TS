@@ -1,9 +1,10 @@
-# 🏎️ React + TypeScript + Vite — F1 Fantasy Team Project
+# 🏡 Roshn Project 
+# With React + TypeScript + Vite 
 
-This project is part of my React & TypeScript learning journey. It simulates an F1 Fantasy Team builder, where each driver is treated as a product with a name, price, and team
+This project is part of my React & TypeScript learning journey. It displays real estate unit cards each unit is treated as a product with properties like name, price, area, bedrooms, location, and an image styled using Emotion CSS-in-JS.
 
 
-## 🛠️ Requirements to Run the Project
+## 🛠️ How to Run the Project
 
 > ⚠️ If you're using PowerShell (default in VS Code), you may need to allow scripts temporarily:
 
