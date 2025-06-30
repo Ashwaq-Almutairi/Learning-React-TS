@@ -1,12 +1,20 @@
 import styled from '@emotion/styled';
+import {Units} from './Units.tsx';
+import {useState} from "react";
 
+const CardGrid=styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  padding:20px;
+`;
 const Card = styled.section`
   width: 300px;
   background-color: #ffffff;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
   font-family: 'Segoe UI', sans-serif;
 `;
 const TopImage=styled.img`
@@ -41,13 +49,18 @@ const InfoItem = styled.div`
     margin-bottom: 4px;
   }
 `;
+const ImageWrapper=styled.div`
+  position:relative;
+`;
+
 
 type Unit={
+  id:number;
   imageId: string;
   name: string;
   price:number;
-  area:string;
-  bedrooms: string;
+  area:number;
+  bedrooms: number;
   location:string;
   imageSize?: number;
 
@@ -60,11 +73,28 @@ type ProductProps={
 
 
 function Product({unit}:ProductProps){
+  const [isFavoriate,setIsFavoriate]=useState(false);
 return(
   // with emotion 
 <Card>
+  <ImageWrapper>
   <TopImage src={unit.imageId} alt={unit.name}/>
+ <button onClick={()=> setIsFavoriate(!isFavoriate)}
+style={{
+      position: 'absolute',
+      top: 8,
+      right: 8,
+      background: 'white',
+      border: 'none',
+      fontSize: '15px',
+      cursor: 'pointer',
+      color: isFavoriate ? 'red' : '#ccc'
+  }}
+  aria-label="Toggle favorite">
+      ♥
+  </button></ImageWrapper>
   <Name>{unit.name}</Name>
+  
   <InfoRow>
     <InfoItem>
       <b>Price:</b>
@@ -109,17 +139,12 @@ return(
 );
 }
 
-
-export default function ProductCard(){
- return(
-  <Product
-  unit={{
-    name: "Villa C20",
-    price: 3.5,
-    area: "407 ",
-    bedrooms: "5",
-    location: "Sedra",
-    imageId: "src/assets/C20.jpg",
-  }}/>
- );
+export default function ProductCard() {
+  return (
+    <CardGrid>
+      {Units.map((unit) => (
+        <Product key={unit.id} unit={unit} />
+      ))}
+    </CardGrid>
+  );
 }

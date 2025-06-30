@@ -1,38 +1,42 @@
-import fernandoImage from './assets/FernsnoAlonso.jpg';
-import maxImage from './assets/MaxVerstappen.jpg';
-import charlesImage from './assets/CharlesLerclerc.jpg';
-import landoImage from './assets/LandoNorris.jpg';
+import c20 from './assets/C20.jpg';
+import DP2 from './assets/DP2.webp';
+import C10 from './assets/C10.webp';
+import TH1 from './assets/TH1.jpg';
 
-export const Drivers=[{
+export const Units=[{
   id:1,
-  name:'Fernando Alonso',
-  price:5.8,
-  wins:32,
-  Team:"Aston Martin",
-  imageId: fernandoImage
+  imageId:c20,
+  name: 'Villa C20',
+  price:3.5,
+  area:407,
+  bedrooms: 5,
+  location:'Sedra'
 },
 {id:2,
-  name:"Max verstappen",
-  price:30,
-  wins:64,
-  Team:"Red bull",
-  imageId: maxImage
+  imageId:DP2,
+  name: 'Duplex DP20',
+  price:1.7,
+  area:250,
+  bedrooms: 3,
+  location:'Aldanah'
 
 },
 {id:3,
-  name:"Charles Leclerc",
-  price:19.3,
-  wins:8,
-  Team:"Ferrari",
-  imageId: charlesImage
+  imageId:C10,
+  name: 'Villa C10',
+  price:3.7,
+  area:450,
+  bedrooms: 5,
+  location:'Almanar'
 
 },
 {id:4,
-  name:"Lando Norris",
-  price:5,
-  wins:8,
-  Team:"Mclaren",
-  imageId: landoImage
+  imageId:TH1,
+  name: 'Townhouse TH1',
+  price:2.5,
+  area:200,
+  bedrooms: 3,
+  location:'Alarous'
 
 }
 
