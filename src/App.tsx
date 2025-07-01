@@ -1,125 +1,17 @@
-import styled from '@emotion/styled';
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Route,Routes,useParams } from 'react-router-dom';
 
-const Card = styled.section`
-  width: 300px;
-  background-color: #ffffff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  font-family: 'Segoe UI', sans-serif;
-`;
-const TopImage=styled.img`
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-`;
+import ProductCard from './ProductCard';
+import ProductDetails from './ProductDetails';
 
-const Name = styled.h2`
-  text-align: center;
-  margin: 16px 0 8px;
-  font-size: 22px;
-  color: #2c3e50;
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 0;
-  font-size: 14px;
-  color: #34495e;
-  border-top: 1px solid #eee;
-`;
-
-const InfoItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  b {
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-`;
-
-type Unit={
-  imageId: string;
-  name: string;
-  price:number;
-  area:string;
-  bedrooms: string;
-  location:string;
-  imageSize?: number;
-
-};
-
-type ProductProps={
-  unit: Unit;
-};
-
-
-
-function Product({unit}:ProductProps){
+export default function App() {
 return(
-  // with emotion 
-<Card>
-  <TopImage src={unit.imageId} alt={unit.name}/>
-  <Name>{unit.name}</Name>
-  <InfoRow>
-    <InfoItem>
-      <b>Price:</b>
-      {unit.price}M
-    </InfoItem>
-    <InfoItem>
-      <b>Area: </b>
-      {unit.area} sqm
-    </InfoItem>
-    <InfoItem>
-      <b>Bedrooms:</b>
-      {unit.bedrooms}
-    </InfoItem>
-    <InfoItem>
-      <b>Location: </b>
-      {unit.location}
-    </InfoItem>
-  </InfoRow>
-</Card>
-
-//with css
-/*<section className="profile">
-  <img
-  className="avatar"
-  src={person.imageId}
-  alt={person.name}
-  width={imageSize}
-  height={imageSize} />
-  <h2>{person.name}</h2>
-  <ul>
-    <li>
-      <b>Price:$ </b> {person.price} <b>M</b>
-    </li>
-    <li>
-      <b>Wins: </b>{person.wins}
-    </li>
-    <li>
-      <b>Team: </b>{person.team}
-    </li>
-  </ul>
-</section>*/
+  <Router>
+  <Routes>
+  <Route path="/" element={<ProductCard />}></Route>
+  <Route path="/product/:id" element={<ProductDetails />}></Route>
+  </Routes>
+  </Router>
 );
-}
-
-
-export default function ProductCard(){
- return(
-  <Product
-  unit={{
-    name: "Villa C20",
-    price: 3.5,
-    area: "407 ",
-    bedrooms: "5",
-    location: "Sedra",
-    imageId: "src/assets/C20.jpg",
-  }}/>
- );
-}
+} 
