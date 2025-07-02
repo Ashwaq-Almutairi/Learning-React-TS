@@ -76,11 +76,10 @@ function Product({unit}:ProductProps){
   const [isFavoriate,setIsFavoriate]=useState(false);
 return(
   // with emotion 
-  <Link to={`/product/${unit.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
 <Card>
   <ImageWrapper>
-  <TopImage src={unit.imageId} alt={unit.name}/>
- <button onClick={()=> setIsFavoriate(!isFavoriate)}
+ <button onClick={()=> setIsFavoriate(!isFavoriate)
+ }
 style={{
       position: 'absolute',
       top: 8,
@@ -93,7 +92,11 @@ style={{
   }}
   aria-label="Toggle favorite">
       ♥
-  </button></ImageWrapper>
+  </button>
+  </ImageWrapper>
+    <Link to={`/product/${unit.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+    <TopImage src={unit.imageId} alt={unit.name}/>
+
   <Name>{unit.name}</Name>
   
   <InfoRow>
@@ -114,8 +117,9 @@ style={{
       {unit.location}
     </InfoItem>
   </InfoRow>
+  </Link>
 </Card>
-</Link>
+
 );
 }
 
