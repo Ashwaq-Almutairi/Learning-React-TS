@@ -83,7 +83,22 @@ const RemoveButton = styled.button`
   cursor: pointer;
 `;
 
+const Total = styled.p`
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 50px;
+  margin-left: 10px;
+`;
+
+
 export default function CartPage({ cartItems, onRemove }: CartPageProps) {
+    const totalPrice = cartItems.reduce(
+  (total, item) => total + item.unit.price * item.quantity,
+  0
+);
+
   return (
     <Wrapper>
       <Title> </Title>
@@ -102,6 +117,10 @@ export default function CartPage({ cartItems, onRemove }: CartPageProps) {
           </Card>
         ))
       )}
+      {cartItems.length > 0 && (
+    <Total>Total: {totalPrice.toFixed(2)}M</Total>
+    )}
+
     </Wrapper>
   );
 }
