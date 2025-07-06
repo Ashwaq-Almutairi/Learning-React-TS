@@ -3,10 +3,8 @@ import {Units} from './Units';
 import styled from '@emotion/styled';
 
 const Wrapper = styled.div`
- margin-left:300px;
- margin-top:50px;
+ padding-left:100px;
   font-family: 'Segoe UI', sans-serif;
-  min-height: 100vh;
 `;
 
 const BackButton = styled.button`
@@ -37,7 +35,7 @@ const Card = styled.div`
 `;
 
 const Image = styled.img`
-  width: 300px;
+  width: 850px;
   height: auto;
   border-radius: 8px;
   object-fit: cover;
@@ -50,7 +48,7 @@ const Info = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 28px;
+  font-size: 40px;
   color: #2c3e50;
   margin-bottom: 10px;
 `;

@@ -53,9 +53,26 @@ const InfoItem = styled.div`
 const ImageWrapper=styled.div`
   position:relative;
 `;
+const AddToCart=styled.button`
+
+   display: flex;
+  align-items: center;
+  color:white;
+  border:none;
+  border-radius:12px;
+ background:#01382F;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+`;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+`;
 
 
-type Unit={
+
+export type Unit={
   id:number;
   imageId: string;
   name: string;
@@ -69,10 +86,11 @@ type Unit={
 
 type ProductProps={
   unit: Unit;
+  onAddToCart:(unit:Unit) =>void;
 };
 
 
-function Product({unit}:ProductProps){
+function Product({unit,onAddToCart}:ProductProps){
   const [isFavoriate,setIsFavoriate]=useState(false);
 return(
   // with emotion 
@@ -118,17 +136,23 @@ style={{
     </InfoItem>
   </InfoRow>
   </Link>
+  <ButtonWrapper>
+  <AddToCart  onClick={()=> onAddToCart(unit)}>Add to cart 🛒</AddToCart>
+  </ButtonWrapper>
 </Card>
 
 );
 }
 
-export default function ProductCard(){
+
+export default function ProductCard({ onAddToCart }: { onAddToCart: (unit: Unit) => void }){
 return(
+    <>
 <CardGrid>
     {Units.map((unit)=>(
-        <Product key={unit.id} unit={unit}/>
+     <Product key={unit.id} unit={unit} onAddToCart={onAddToCart}/>
     ))}
 </CardGrid>
+</>
 );
 }
