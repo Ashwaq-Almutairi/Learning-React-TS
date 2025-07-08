@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import type { Unit } from './ProductCard.tsx';
+import { Link } from 'react-router-dom';
+
 
 type CartItem = {
   unit: Unit;
@@ -91,6 +93,17 @@ const Total = styled.p`
   margin-top: 50px;
   margin-left: 10px;
 `;
+const Checkout=styled.button`
+    background: #01382F;
+    text-align: center;
+      margin-top: 50px;
+    margin-left: 170px;
+`;
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+`;
 
 
 export default function CartPage({ cartItems, onRemove }: CartPageProps) {
@@ -101,7 +114,7 @@ export default function CartPage({ cartItems, onRemove }: CartPageProps) {
 
   return (
     <Wrapper>
-      <Title> </Title>
+         <Title></Title>
       {cartItems.length === 0 ? (
         <Text>Your cart is empty.</Text>
       ) : (
@@ -120,7 +133,8 @@ export default function CartPage({ cartItems, onRemove }: CartPageProps) {
       {cartItems.length > 0 && (
     <Total>Total: {totalPrice.toFixed(2)}M</Total>
     )}
-
+   <Checkout>
+        <StyledLink to="/checkout">Checkout</StyledLink></Checkout>
     </Wrapper>
   );
 }

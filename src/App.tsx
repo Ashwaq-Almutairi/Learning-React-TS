@@ -4,6 +4,7 @@ import Navbar from './Navbar.tsx';
 import ProductListPage from './ProductListPage.tsx';
 import ProductDetails from './ProductDetails.tsx';
 import CartPage from './CartPage.tsx';
+import Checkout from './Checkout.tsx';
 import type { Unit } from './ProductCard.tsx';
 type CartItem = {
   unit: Unit;
@@ -40,6 +41,7 @@ const handleRemoveFromCart = (id: number) => {
         <Route path="/" element={<ProductListPage onAddToCart={handleAddToCart} />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage cartItems={cartItems} onRemove={handleRemoveFromCart} />} />
+        <Route path="/checkout" element={<Checkout/>} />
       </Routes>
     </Router>
    
