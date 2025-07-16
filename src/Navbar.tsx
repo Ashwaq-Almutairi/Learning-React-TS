@@ -11,7 +11,7 @@ function Navbar({cartCount}:NavbarProps){
     <nav className="navbar">
     <div className="navbar-left">
    <Link to="/" className="logo">
-    <img src="src/assets/roshn-logo.jpg" alt="Roshn logo"/>
+    <p>Store</p>
     </Link>
     </div>
     <div className="navbar-right">

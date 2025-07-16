@@ -38,7 +38,7 @@ const handleRemoveFromCart = (id: number) => {
     <Router>
       <Navbar cartCount={cartItems.length} />
       <Routes>
-        <Route path="/" element={<ProductListPage onAddToCart={handleAddToCart} />} />
+        <Route path="/" element={<ProductListPage onAddToCart={handleAddToCart} units={[]} />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage cartItems={cartItems} onRemove={handleRemoveFromCart} />} />
         <Route path="/checkout" element={<Checkout/>} />

@@ -1,15 +1,31 @@
+
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Units } from './Units.tsx';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../src/store/features/cart/cartSlice.ts';
 
-const CardGrid=styled.div`
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  padding:20px;
-`;
+
+
+
+export type Unit = {
+ id: number;
+  title: string;
+  price: number;
+  image: string;
+  description: string;
+  category: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+};
+
+type ProductCardProps = {
+  unit: Unit;
+  onAddToCart: (unit: Unit) => void;
+};
+
 const Card = styled.section`
   width: 300px;
   background-color: #ffffff;
@@ -17,8 +33,10 @@ const Card = styled.section`
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;
+  gap:10px;
 `;
-const TopImage=styled.img`
+
+const TopImage = styled.img`
   width: 100%;
   height: 150px;
   object-fit: cover;
@@ -27,7 +45,7 @@ const TopImage=styled.img`
 const Name = styled.h2`
   text-align: center;
   margin: 16px 0 8px;
-  font-size: 22px;
+  font-size: 15px;
   color: #2c3e50;
 `;
 
@@ -50,52 +68,40 @@ const InfoItem = styled.div`
     margin-bottom: 4px;
   }
 `;
-const ImageWrapper=styled.div`
-  position:relative;
-`;
-const AddToCart=styled.button`
 
-   display: flex;
+const AddToCart = styled.button`
+  display: flex;
   align-items: center;
-  color:white;
-  border:none;
-  border-radius:12px;
- background:#01382F;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-
+  color: white;
+  border: none;
+  border-radius: 12px;
+  background: #01382f;
+  padding: 10px 20px;
+  cursor: pointer;
 `;
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 16px 0;
 `;
+const ImageWrapper=styled.div`
+  position:relative;
+`;
 
 
 
-export type Unit={
-  id:number;
-  imageId: string;
-  name: string;
-  price:number;
-  area:number;
-  bedrooms: number;
-  location:string;
-  imageSize?: number;
+function ProductCard({ unit, onAddToCart }: ProductCardProps) {
+    const [isFavoriate,setIsFavoriate]=useState(false);
+    const dispatch = useDispatch();
 
+  const handleAdd = () => {
+  dispatch(addToCart(unit)); 
 };
 
-type ProductProps={
-  unit: Unit;
-  onAddToCart:(unit:Unit) =>void;
-};
-
-
-function Product({unit,onAddToCart}:ProductProps){
-  const [isFavoriate,setIsFavoriate]=useState(false);
-return(
-  // with emotion 
-<Card>
-  <ImageWrapper>
+  return (
+    <Card>
+        <ImageWrapper>
  <button onClick={()=> setIsFavoriate(!isFavoriate)
  }
 style={{
@@ -112,47 +118,32 @@ style={{
       ♥
   </button>
   </ImageWrapper>
-    <Link to={`/product/${unit.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-    <TopImage src={unit.imageId} alt={unit.name}/>
+ <Link to={`/product/${unit.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <TopImage src={unit.image} alt={unit.title} />
 
-  <Name>{unit.name}</Name>
-  
-  <InfoRow>
-    <InfoItem>
-      <b>Price:</b>
-      {unit.price}M
-    </InfoItem>
-    <InfoItem>
-      <b>Area: </b>
-      {unit.area} sqm
-    </InfoItem>
-    <InfoItem>
-      <b>Bedrooms:</b>
-      {unit.bedrooms}
-    </InfoItem>
-    <InfoItem>
-      <b>Location: </b>
-      {unit.location}
-    </InfoItem>
-  </InfoRow>
-  </Link>
-  <ButtonWrapper>
-  <AddToCart  onClick={()=> onAddToCart(unit)}>Add to cart 🛒</AddToCart>
-  </ButtonWrapper>
-</Card>
+      <Name>{unit.title}</Name>
 
-);
+      <InfoRow>
+        <InfoItem>
+          <b>Price:</b>
+          ${unit.price}
+        </InfoItem>
+        <InfoItem>
+          <b>Category:</b>
+          {unit.category}
+        </InfoItem>
+        <InfoItem>
+          <b>Rating:</b>
+          {unit.rating.rate} ({unit.rating.count})
+        </InfoItem>
+      </InfoRow>
+</Link>
+      <ButtonWrapper>
+        <AddToCart onClick={() => onAddToCart(unit)}>Add to cart 🛒</AddToCart>
+      </ButtonWrapper>
+    </Card>
+  );
 }
 
 
-export default function ProductCard({ onAddToCart }: { onAddToCart: (unit: Unit) => void }){
-return(
-    <>
-<CardGrid>
-    {Units.map((unit)=>(
-     <Product key={unit.id} unit={unit} onAddToCart={onAddToCart}/>
-    ))}
-</CardGrid>
-</>
-);
-}
+export default ProductCard;

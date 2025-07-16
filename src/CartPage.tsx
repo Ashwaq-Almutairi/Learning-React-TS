@@ -16,7 +16,8 @@ type CartPageProps = {
 
 const Wrapper = styled.div`
   padding: 400px;
-  max-width: 1000px;
+  width: 500px;
+  height:400px;
   margin: auto;
 `;
 
@@ -24,8 +25,8 @@ const Title = styled.h2`
   text-align: left;
   font-size: 30px;
   margin-bottom: 100px;
-  margin-top: -400px;
-   margin-left: 350px;
+  margin-top: -380px;
+   margin-left: 220px;
 
   
 `;
@@ -34,8 +35,8 @@ const Text =styled.p`
  text-align: center;
   font-size: 20px;
   margin-bottom: 100px;
-  margin-top: -40px;
-    margin-left: 100px;
+
+
 `;
 
 const Card = styled.div`
@@ -49,7 +50,7 @@ const Card = styled.div`
 `;
 
 const Image = styled.img`
-  width: 180px;
+  width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
@@ -62,7 +63,7 @@ const Info = styled.div`
 
 const Name = styled.h3`
   margin: 0;
-  font-size: 20px;
+  font-size: 15px;
 `;
 
 const Price = styled.p`
@@ -73,6 +74,7 @@ const Price = styled.p`
 const Quantity = styled.p`
   margin: 4px 0;
   font-weight: bold;
+   font-size: 12px;
 `;
 
 const RemoveButton = styled.button`
@@ -97,7 +99,7 @@ const Checkout=styled.button`
     background: #01382F;
     text-align: center;
       margin-top: 50px;
-    margin-left: 170px;
+    margin-left: 200px;
 `;
 const StyledLink = styled(Link)`
   color: white;
@@ -114,16 +116,16 @@ export default function CartPage({ cartItems, onRemove }: CartPageProps) {
 
   return (
     <Wrapper>
-         <Title></Title>
+         <Title>Cart</Title>
       {cartItems.length === 0 ? (
         <Text>Your cart is empty.</Text>
       ) : (
         cartItems.map((item) => (
           <Card key={item.unit.id}>
-            <Image src={item.unit.imageId} alt={item.unit.name} />
+            <Image src={item.unit.image} alt={item.unit.title} />
             <Info>
-              <Name>{item.unit.name}</Name>
-              <Price>{item.unit.price}M</Price>
+              <Name>{item.unit.title}</Name>
+              <Price>{item.unit.price}$</Price>
               <Quantity>Quantity: {item.quantity}</Quantity>
             </Info>
             <RemoveButton onClick={() => onRemove(item.unit.id)}>X</RemoveButton>
@@ -131,7 +133,7 @@ export default function CartPage({ cartItems, onRemove }: CartPageProps) {
         ))
       )}
       {cartItems.length > 0 && (
-    <Total>Total: {totalPrice.toFixed(2)}M</Total>
+    <Total>Total: {totalPrice.toFixed(2)}$</Total>
     )}
    <Checkout>
         <StyledLink to="/checkout">Checkout</StyledLink></Checkout>
